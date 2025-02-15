@@ -80,7 +80,7 @@ class LeakSwap(ARC4Contract):
         The broken signature leaks the private key, because it uses an R value whose scalar
         is known: r = 1.
 
-        For some reason, signature.bytes is 66 bytes long and xternal_pk.bytes is 34 bytes long.
+        Due to ARC4 encoding, signature.bytes is 66 bytes long and xternal_pk.bytes is 34 bytes long.
         They start with \x00 and the actual data starts at the 3rd byte.
         """
         assert op.extract(signature.bytes, 0, 34) == Bytes(b'\x00@Xfffffffffffffffffffffffffffffff')
