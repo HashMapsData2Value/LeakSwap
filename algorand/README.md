@@ -1,4 +1,4 @@
-# algorand_contract
+# algorand
 
 Welcome to your new AlgoKit project!
 
