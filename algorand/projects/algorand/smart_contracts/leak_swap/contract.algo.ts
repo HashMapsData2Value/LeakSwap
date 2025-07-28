@@ -1,4 +1,5 @@
 import { abimethod, Account, assert, assertMatch, Bytes, bytes, Contract, ensureBudget, Global, GlobalState, itxn, uint64 } from '@algorandfoundation/algorand-typescript'
+import { gtxn } from '@algorandfoundation/algorand-typescript'
 import { ed25519verifyBare, extract, Txn } from '@algorandfoundation/algorand-typescript/op'
 
 export class LeakSwap extends Contract {
@@ -65,7 +66,6 @@ export class LeakSwap extends Contract {
   They start with \x00 and the actual data starts at the 3rd byte.
   */
   private leakyVerifyEd25519(signature: bytes, xternalPK: bytes): void {
-    ensureBudget(2000)
     assert(
       extract(signature, 0, 32) === Bytes.fromHex('5866666666666666666666666666666666666666666666666666666666666666'),
       'R-point encoding not 0x58666... . Signature R must be broken (=BASEPOINT) to allow the secret key to be leaked!')
@@ -121,6 +121,7 @@ export class LeakSwap extends Contract {
    * leaking the xternal secret key. That will allow Ali to claim the xternal funds
   */
   public leakyClaim(signature: bytes): void {
+    ensureBudget(2000)
     assertMatch(Txn, { sender: this.xinAlgoAddr.value }, 'Only Xin can do leaky claim!')
     assert(Global.latestTimestamp > this.t0.value || this.aliReady.value, 'Cannot claim: time must be past t0 OR Ali must have set ready!')
     assert(Global.latestTimestamp < this.t1.value, 'Cannot claim after t1!')

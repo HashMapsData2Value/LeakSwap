@@ -7,14 +7,14 @@ main:
     bytecblock "aliAlgoAddr" "aliReady" "t0" "t1" "xinAlgoAddr" "aliXternalPK" "xinXternalPK" 0x068101
     txn ApplicationID
     bnz main_after_if_else@2
-    // smart_contracts/leak_swap/contract.algo.ts:15
+    // smart_contracts/leak_swap/contract.algo.ts:16
     // public aliReady = GlobalState({ initialValue: false })
     bytec_1 // "aliReady"
     intc_0 // 0
     app_global_put
 
 main_after_if_else@2:
-    // smart_contracts/leak_swap/contract.algo.ts:4
+    // smart_contracts/leak_swap/contract.algo.ts:5
     // export class LeakSwap extends Contract {
     txn NumAppArgs
     bz main_after_if_else@15
@@ -23,13 +23,13 @@ main_after_if_else@2:
     match main_createApplication_route@5 main_verifySignature_route@6 main_setReady_route@7 main_getContractState_route@8 main_leakyRefund_route@9 main_leakyClaim_route@10 main_punishRefund_route@11
 
 main_after_if_else@15:
-    // smart_contracts/leak_swap/contract.algo.ts:4
+    // smart_contracts/leak_swap/contract.algo.ts:5
     // export class LeakSwap extends Contract {
     intc_0 // 0
     return
 
 main_punishRefund_route@11:
-    // smart_contracts/leak_swap/contract.algo.ts:139
+    // smart_contracts/leak_swap/contract.algo.ts:140
     // public punishRefund(): void {
     txn OnCompletion
     !
@@ -48,7 +48,7 @@ main_leakyClaim_route@10:
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/leak_swap/contract.algo.ts:4
+    // smart_contracts/leak_swap/contract.algo.ts:5
     // export class LeakSwap extends Contract {
     txna ApplicationArgs 1
     extract 2 0
@@ -66,7 +66,7 @@ main_leakyRefund_route@9:
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/leak_swap/contract.algo.ts:4
+    // smart_contracts/leak_swap/contract.algo.ts:5
     // export class LeakSwap extends Contract {
     txna ApplicationArgs 1
     extract 2 0
@@ -106,27 +106,27 @@ main_setReady_route@7:
     return
 
 main_verifySignature_route@6:
-    // smart_contracts/leak_swap/contract.algo.ts:55
+    // smart_contracts/leak_swap/contract.algo.ts:56
     // public verifySignature(signature: bytes, xternalPK: bytes): void {
     txn OnCompletion
     !
     assert // OnCompletion is not NoOp
     txn ApplicationID
     assert // can only call when not creating
-    // smart_contracts/leak_swap/contract.algo.ts:4
+    // smart_contracts/leak_swap/contract.algo.ts:5
     // export class LeakSwap extends Contract {
     txna ApplicationArgs 1
     extract 2 0
     txna ApplicationArgs 2
     extract 2 0
-    // smart_contracts/leak_swap/contract.algo.ts:55
+    // smart_contracts/leak_swap/contract.algo.ts:56
     // public verifySignature(signature: bytes, xternalPK: bytes): void {
     callsub verifySignature
     intc_1 // 1
     return
 
 main_createApplication_route@5:
-    // smart_contracts/leak_swap/contract.algo.ts:20
+    // smart_contracts/leak_swap/contract.algo.ts:21
     // @abimethod({ allowActions: 'NoOp', onCreate: 'require' })
     txn OnCompletion
     !
@@ -134,7 +134,7 @@ main_createApplication_route@5:
     txn ApplicationID
     !
     assert // can only call when creating
-    // smart_contracts/leak_swap/contract.algo.ts:4
+    // smart_contracts/leak_swap/contract.algo.ts:5
     // export class LeakSwap extends Contract {
     txna ApplicationArgs 1
     extract 2 0
@@ -147,7 +147,7 @@ main_createApplication_route@5:
     btoi
     txna ApplicationArgs 5
     btoi
-    // smart_contracts/leak_swap/contract.algo.ts:20
+    // smart_contracts/leak_swap/contract.algo.ts:21
     // @abimethod({ allowActions: 'NoOp', onCreate: 'require' })
     callsub createApplication
     intc_1 // 1
@@ -156,7 +156,7 @@ main_createApplication_route@5:
 
 // smart_contracts/leak_swap/contract.algo.ts::LeakSwap.createApplication(aliXternalPK: bytes, xinAlgoAddr: bytes, xinXternalPK: bytes, t0: uint64, t1: uint64) -> void:
 createApplication:
-    // smart_contracts/leak_swap/contract.algo.ts:20-27
+    // smart_contracts/leak_swap/contract.algo.ts:21-28
     // @abimethod({ allowActions: 'NoOp', onCreate: 'require' })
     // public createApplication(
     //   aliXternalPK: bytes,
@@ -166,61 +166,61 @@ createApplication:
     //   t1: uint64
     // ): void {
     proto 5 0
-    // smart_contracts/leak_swap/contract.algo.ts:6
+    // smart_contracts/leak_swap/contract.algo.ts:7
     // public aliAlgoAddr = GlobalState<Account>()
     bytec_0 // "aliAlgoAddr"
-    // smart_contracts/leak_swap/contract.algo.ts:29
+    // smart_contracts/leak_swap/contract.algo.ts:30
     // this.aliAlgoAddr.value = Global.creatorAddress
     global CreatorAddress
     app_global_put
-    // smart_contracts/leak_swap/contract.algo.ts:9
+    // smart_contracts/leak_swap/contract.algo.ts:10
     // public aliXternalPK = GlobalState<bytes>()
     bytec 5 // "aliXternalPK"
-    // smart_contracts/leak_swap/contract.algo.ts:30
+    // smart_contracts/leak_swap/contract.algo.ts:31
     // this.aliXternalPK.value = aliXternalPK
     frame_dig -5
     app_global_put
-    // smart_contracts/leak_swap/contract.algo.ts:7
+    // smart_contracts/leak_swap/contract.algo.ts:8
     // public xinAlgoAddr = GlobalState<Account>()
     bytec 4 // "xinAlgoAddr"
-    // smart_contracts/leak_swap/contract.algo.ts:32
+    // smart_contracts/leak_swap/contract.algo.ts:33
     // this.xinAlgoAddr.value = xinAlgoAddr
     frame_dig -4
     app_global_put
-    // smart_contracts/leak_swap/contract.algo.ts:10
+    // smart_contracts/leak_swap/contract.algo.ts:11
     // public xinXternalPK = GlobalState<bytes>()
     bytec 6 // "xinXternalPK"
-    // smart_contracts/leak_swap/contract.algo.ts:33
+    // smart_contracts/leak_swap/contract.algo.ts:34
     // this.xinXternalPK.value = xinXternalPK
     frame_dig -3
     app_global_put
-    // smart_contracts/leak_swap/contract.algo.ts:12
+    // smart_contracts/leak_swap/contract.algo.ts:13
     // public t0 = GlobalState<uint64>()
     bytec_2 // "t0"
-    // smart_contracts/leak_swap/contract.algo.ts:35
+    // smart_contracts/leak_swap/contract.algo.ts:36
     // this.t0.value = t0
     frame_dig -2
     app_global_put
-    // smart_contracts/leak_swap/contract.algo.ts:13
+    // smart_contracts/leak_swap/contract.algo.ts:14
     // public t1 = GlobalState<uint64>()
     bytec_3 // "t1"
-    // smart_contracts/leak_swap/contract.algo.ts:36
+    // smart_contracts/leak_swap/contract.algo.ts:37
     // this.t1.value = t1
     frame_dig -1
     app_global_put
-    // smart_contracts/leak_swap/contract.algo.ts:38
+    // smart_contracts/leak_swap/contract.algo.ts:39
     // assert(t1 > t0, 't1 must be greater than t0')
     frame_dig -1
     frame_dig -2
     >
     assert // t1 must be greater than t0
-    // smart_contracts/leak_swap/contract.algo.ts:39
+    // smart_contracts/leak_swap/contract.algo.ts:40
     // assert(t0 > Global.latestTimestamp, 't0 must be in the future')
     frame_dig -2
     global LatestTimestamp
     >
     assert // t0 must be in the future
-    // smart_contracts/leak_swap/contract.algo.ts:40
+    // smart_contracts/leak_swap/contract.algo.ts:41
     // assert(t1 > Global.latestTimestamp, 't1 must be in the future')
     frame_dig -1
     global LatestTimestamp
@@ -231,10 +231,10 @@ createApplication:
 
 // smart_contracts/leak_swap/contract.algo.ts::LeakSwap.disburseFunds(recipient: bytes) -> void:
 disburseFunds:
-    // smart_contracts/leak_swap/contract.algo.ts:43
+    // smart_contracts/leak_swap/contract.algo.ts:44
     // private disburseFunds(recipient: Account): void {
     proto 1 0
-    // smart_contracts/leak_swap/contract.algo.ts:44-50
+    // smart_contracts/leak_swap/contract.algo.ts:45-51
     // itxn
     //   .payment({
     //     amount: 0,
@@ -247,11 +247,11 @@ disburseFunds:
     itxn_field Receiver
     frame_dig -1
     itxn_field CloseRemainderTo
-    // smart_contracts/leak_swap/contract.algo.ts:46
+    // smart_contracts/leak_swap/contract.algo.ts:47
     // amount: 0,
     intc_0 // 0
     itxn_field Amount
-    // smart_contracts/leak_swap/contract.algo.ts:44-49
+    // smart_contracts/leak_swap/contract.algo.ts:45-50
     // itxn
     //   .payment({
     //     amount: 0,
@@ -262,7 +262,7 @@ disburseFunds:
     itxn_field TypeEnum
     intc_0 // 0
     itxn_field Fee
-    // smart_contracts/leak_swap/contract.algo.ts:44-50
+    // smart_contracts/leak_swap/contract.algo.ts:45-51
     // itxn
     //   .payment({
     //     amount: 0,
@@ -276,10 +276,10 @@ disburseFunds:
 
 // smart_contracts/leak_swap/contract.algo.ts::LeakSwap.verifySignature(signature: bytes, xternalPK: bytes) -> void:
 verifySignature:
-    // smart_contracts/leak_swap/contract.algo.ts:55
+    // smart_contracts/leak_swap/contract.algo.ts:56
     // public verifySignature(signature: bytes, xternalPK: bytes): void {
     proto 2 0
-    // smart_contracts/leak_swap/contract.algo.ts:56
+    // smart_contracts/leak_swap/contract.algo.ts:57
     // this.leakyVerifyEd25519(signature, xternalPK)
     frame_dig -2
     frame_dig -1
@@ -289,30 +289,9 @@ verifySignature:
 
 // smart_contracts/leak_swap/contract.algo.ts::LeakSwap.leakyVerifyEd25519(signature: bytes, xternalPK: bytes) -> void:
 leakyVerifyEd25519:
-    // smart_contracts/leak_swap/contract.algo.ts:67
+    // smart_contracts/leak_swap/contract.algo.ts:68
     // private leakyVerifyEd25519(signature: bytes, xternalPK: bytes): void {
     proto 2 0
-
-leakyVerifyEd25519_while_top@2:
-    pushint 2010 // 2010
-    global OpcodeBudget
-    >
-    bz leakyVerifyEd25519_after_while@7
-    itxn_begin
-    pushint 6 // appl
-    itxn_field TypeEnum
-    pushint 5 // DeleteApplication
-    itxn_field OnCompletion
-    bytec 7 // 0x068101
-    itxn_field ApprovalProgram
-    bytec 7 // 0x068101
-    itxn_field ClearStateProgram
-    intc_0 // 0
-    itxn_field Fee
-    itxn_submit
-    b leakyVerifyEd25519_while_top@2
-
-leakyVerifyEd25519_after_while@7:
     // smart_contracts/leak_swap/contract.algo.ts:70
     // extract(signature, 0, 32) === Bytes.fromHex('5866666666666666666666666666666666666666666666666666666666666666'),
     frame_dig -2
@@ -339,7 +318,7 @@ setReady:
     // smart_contracts/leak_swap/contract.algo.ts:81
     // assertMatch(Txn, { sender: this.aliAlgoAddr.value }, 'Only Ali can set the contract to ready!')
     txn Sender
-    // smart_contracts/leak_swap/contract.algo.ts:6
+    // smart_contracts/leak_swap/contract.algo.ts:7
     // public aliAlgoAddr = GlobalState<Account>()
     intc_0 // 0
     bytec_0 // "aliAlgoAddr"
@@ -349,7 +328,7 @@ setReady:
     // assertMatch(Txn, { sender: this.aliAlgoAddr.value }, 'Only Ali can set the contract to ready!')
     ==
     assert // Only Ali can set the contract to ready!
-    // smart_contracts/leak_swap/contract.algo.ts:15
+    // smart_contracts/leak_swap/contract.algo.ts:16
     // public aliReady = GlobalState({ initialValue: false })
     bytec_1 // "aliReady"
     // smart_contracts/leak_swap/contract.algo.ts:82
@@ -364,7 +343,7 @@ getContractState:
     // smart_contracts/leak_swap/contract.algo.ts:90
     // if (Global.latestTimestamp > this.t1.value) {
     global LatestTimestamp
-    // smart_contracts/leak_swap/contract.algo.ts:13
+    // smart_contracts/leak_swap/contract.algo.ts:14
     // public t1 = GlobalState<uint64>()
     intc_0 // 0
     bytec_3 // "t1"
@@ -383,7 +362,7 @@ getContractState_after_if_else@2:
     // smart_contracts/leak_swap/contract.algo.ts:93
     // if (Global.latestTimestamp > this.t0.value) {
     global LatestTimestamp
-    // smart_contracts/leak_swap/contract.algo.ts:12
+    // smart_contracts/leak_swap/contract.algo.ts:13
     // public t0 = GlobalState<uint64>()
     intc_0 // 0
     bytec_2 // "t0"
@@ -399,7 +378,7 @@ getContractState_after_if_else@2:
     retsub
 
 getContractState_after_if_else@4:
-    // smart_contracts/leak_swap/contract.algo.ts:15
+    // smart_contracts/leak_swap/contract.algo.ts:16
     // public aliReady = GlobalState({ initialValue: false })
     intc_0 // 0
     bytec_1 // "aliReady"
@@ -428,7 +407,7 @@ leakyRefund:
     // smart_contracts/leak_swap/contract.algo.ts:108
     // assertMatch(Txn, { sender: this.aliAlgoAddr.value }, 'Only Ali can do leaky refund!')
     txn Sender
-    // smart_contracts/leak_swap/contract.algo.ts:6
+    // smart_contracts/leak_swap/contract.algo.ts:7
     // public aliAlgoAddr = GlobalState<Account>()
     intc_0 // 0
     bytec_0 // "aliAlgoAddr"
@@ -441,7 +420,7 @@ leakyRefund:
     // smart_contracts/leak_swap/contract.algo.ts:109
     // assert(Global.latestTimestamp <= this.t0.value, 'Cannot refund after t0!')
     global LatestTimestamp
-    // smart_contracts/leak_swap/contract.algo.ts:12
+    // smart_contracts/leak_swap/contract.algo.ts:13
     // public t0 = GlobalState<uint64>()
     intc_0 // 0
     bytec_2 // "t0"
@@ -451,7 +430,7 @@ leakyRefund:
     // assert(Global.latestTimestamp <= this.t0.value, 'Cannot refund after t0!')
     <=
     assert // Cannot refund after t0!
-    // smart_contracts/leak_swap/contract.algo.ts:15
+    // smart_contracts/leak_swap/contract.algo.ts:16
     // public aliReady = GlobalState({ initialValue: false })
     intc_0 // 0
     bytec_1 // "aliReady"
@@ -461,7 +440,7 @@ leakyRefund:
     // assert(!this.aliReady.value, 'Cannot refund after set ready!')
     !
     assert // Cannot refund after set ready!
-    // smart_contracts/leak_swap/contract.algo.ts:9
+    // smart_contracts/leak_swap/contract.algo.ts:10
     // public aliXternalPK = GlobalState<bytes>()
     intc_0 // 0
     bytec 5 // "aliXternalPK"
@@ -472,7 +451,7 @@ leakyRefund:
     frame_dig -1
     swap
     callsub leakyVerifyEd25519
-    // smart_contracts/leak_swap/contract.algo.ts:6
+    // smart_contracts/leak_swap/contract.algo.ts:7
     // public aliAlgoAddr = GlobalState<Account>()
     intc_0 // 0
     bytec_0 // "aliAlgoAddr"
@@ -489,39 +468,60 @@ leakyClaim:
     // smart_contracts/leak_swap/contract.algo.ts:123
     // public leakyClaim(signature: bytes): void {
     proto 1 0
-    // smart_contracts/leak_swap/contract.algo.ts:124
+
+leakyClaim_while_top@6:
+    pushint 2010 // 2010
+    global OpcodeBudget
+    >
+    bz leakyClaim_after_while@11
+    itxn_begin
+    pushint 6 // appl
+    itxn_field TypeEnum
+    pushint 5 // DeleteApplication
+    itxn_field OnCompletion
+    bytec 7 // 0x068101
+    itxn_field ApprovalProgram
+    bytec 7 // 0x068101
+    itxn_field ClearStateProgram
+    intc_0 // 0
+    itxn_field Fee
+    itxn_submit
+    b leakyClaim_while_top@6
+
+leakyClaim_after_while@11:
+    // smart_contracts/leak_swap/contract.algo.ts:125
     // assertMatch(Txn, { sender: this.xinAlgoAddr.value }, 'Only Xin can do leaky claim!')
     txn Sender
-    // smart_contracts/leak_swap/contract.algo.ts:7
+    // smart_contracts/leak_swap/contract.algo.ts:8
     // public xinAlgoAddr = GlobalState<Account>()
     intc_0 // 0
     bytec 4 // "xinAlgoAddr"
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/leak_swap/contract.algo.ts:124
+    // smart_contracts/leak_swap/contract.algo.ts:125
     // assertMatch(Txn, { sender: this.xinAlgoAddr.value }, 'Only Xin can do leaky claim!')
     ==
     assert // Only Xin can do leaky claim!
-    // smart_contracts/leak_swap/contract.algo.ts:125
+    // smart_contracts/leak_swap/contract.algo.ts:126
     // assert(Global.latestTimestamp > this.t0.value || this.aliReady.value, 'Cannot claim: time must be past t0 OR Ali must have set ready!')
     global LatestTimestamp
-    // smart_contracts/leak_swap/contract.algo.ts:12
+    // smart_contracts/leak_swap/contract.algo.ts:13
     // public t0 = GlobalState<uint64>()
     intc_0 // 0
     bytec_2 // "t0"
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/leak_swap/contract.algo.ts:125
+    // smart_contracts/leak_swap/contract.algo.ts:126
     // assert(Global.latestTimestamp > this.t0.value || this.aliReady.value, 'Cannot claim: time must be past t0 OR Ali must have set ready!')
     >
     bnz leakyClaim_bool_true@2
-    // smart_contracts/leak_swap/contract.algo.ts:15
+    // smart_contracts/leak_swap/contract.algo.ts:16
     // public aliReady = GlobalState({ initialValue: false })
     intc_0 // 0
     bytec_1 // "aliReady"
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/leak_swap/contract.algo.ts:125
+    // smart_contracts/leak_swap/contract.algo.ts:126
     // assert(Global.latestTimestamp > this.t0.value || this.aliReady.value, 'Cannot claim: time must be past t0 OR Ali must have set ready!')
     bz leakyClaim_bool_false@3
 
@@ -529,40 +529,40 @@ leakyClaim_bool_true@2:
     intc_1 // 1
 
 leakyClaim_bool_merge@4:
-    // smart_contracts/leak_swap/contract.algo.ts:125
+    // smart_contracts/leak_swap/contract.algo.ts:126
     // assert(Global.latestTimestamp > this.t0.value || this.aliReady.value, 'Cannot claim: time must be past t0 OR Ali must have set ready!')
     assert // Cannot claim: time must be past t0 OR Ali must have set ready!
-    // smart_contracts/leak_swap/contract.algo.ts:126
+    // smart_contracts/leak_swap/contract.algo.ts:127
     // assert(Global.latestTimestamp < this.t1.value, 'Cannot claim after t1!')
     global LatestTimestamp
-    // smart_contracts/leak_swap/contract.algo.ts:13
+    // smart_contracts/leak_swap/contract.algo.ts:14
     // public t1 = GlobalState<uint64>()
     intc_0 // 0
     bytec_3 // "t1"
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/leak_swap/contract.algo.ts:126
+    // smart_contracts/leak_swap/contract.algo.ts:127
     // assert(Global.latestTimestamp < this.t1.value, 'Cannot claim after t1!')
     <
     assert // Cannot claim after t1!
-    // smart_contracts/leak_swap/contract.algo.ts:10
+    // smart_contracts/leak_swap/contract.algo.ts:11
     // public xinXternalPK = GlobalState<bytes>()
     intc_0 // 0
     bytec 6 // "xinXternalPK"
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/leak_swap/contract.algo.ts:129
+    // smart_contracts/leak_swap/contract.algo.ts:130
     // this.leakyVerifyEd25519(signature, this.xinXternalPK.value)
     frame_dig -1
     swap
     callsub leakyVerifyEd25519
-    // smart_contracts/leak_swap/contract.algo.ts:7
+    // smart_contracts/leak_swap/contract.algo.ts:8
     // public xinAlgoAddr = GlobalState<Account>()
     intc_0 // 0
     bytec 4 // "xinAlgoAddr"
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/leak_swap/contract.algo.ts:131
+    // smart_contracts/leak_swap/contract.algo.ts:132
     // this.disburseFunds(this.xinAlgoAddr.value)
     callsub disburseFunds
     retsub
@@ -574,39 +574,39 @@ leakyClaim_bool_false@3:
 
 // smart_contracts/leak_swap/contract.algo.ts::LeakSwap.punishRefund() -> void:
 punishRefund:
-    // smart_contracts/leak_swap/contract.algo.ts:140
+    // smart_contracts/leak_swap/contract.algo.ts:141
     // assertMatch(Txn, { sender: this.aliAlgoAddr.value }, 'Only Ali can do punish refund!')
     txn Sender
-    // smart_contracts/leak_swap/contract.algo.ts:6
+    // smart_contracts/leak_swap/contract.algo.ts:7
     // public aliAlgoAddr = GlobalState<Account>()
     intc_0 // 0
     bytec_0 // "aliAlgoAddr"
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/leak_swap/contract.algo.ts:140
+    // smart_contracts/leak_swap/contract.algo.ts:141
     // assertMatch(Txn, { sender: this.aliAlgoAddr.value }, 'Only Ali can do punish refund!')
     ==
     assert // Only Ali can do punish refund!
-    // smart_contracts/leak_swap/contract.algo.ts:141
+    // smart_contracts/leak_swap/contract.algo.ts:142
     // assert(Global.latestTimestamp >= this.t1.value, 'Cannot punish refund before t1!')
     global LatestTimestamp
-    // smart_contracts/leak_swap/contract.algo.ts:13
+    // smart_contracts/leak_swap/contract.algo.ts:14
     // public t1 = GlobalState<uint64>()
     intc_0 // 0
     bytec_3 // "t1"
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/leak_swap/contract.algo.ts:141
+    // smart_contracts/leak_swap/contract.algo.ts:142
     // assert(Global.latestTimestamp >= this.t1.value, 'Cannot punish refund before t1!')
     >=
     assert // Cannot punish refund before t1!
-    // smart_contracts/leak_swap/contract.algo.ts:6
+    // smart_contracts/leak_swap/contract.algo.ts:7
     // public aliAlgoAddr = GlobalState<Account>()
     intc_0 // 0
     bytec_0 // "aliAlgoAddr"
     app_global_get_ex
     assert // check GlobalState exists
-    // smart_contracts/leak_swap/contract.algo.ts:142
+    // smart_contracts/leak_swap/contract.algo.ts:143
     // this.disburseFunds(this.aliAlgoAddr.value)
     callsub disburseFunds
     retsub

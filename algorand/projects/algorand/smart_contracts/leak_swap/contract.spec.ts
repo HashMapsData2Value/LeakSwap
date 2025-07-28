@@ -16,6 +16,7 @@ describe('LeakSwap contract', () => {
   const ctx = new TestExecutionContext()
   const aliAlgoAddr = ctx.defaultSender
   const xinAlgoAddr = ctx.any.account()
+  const transferAmount = 1_000_000
 
   it('test leakySignature method in contract', () => {
     const contract = ctx.contract.create(LeakSwap)
