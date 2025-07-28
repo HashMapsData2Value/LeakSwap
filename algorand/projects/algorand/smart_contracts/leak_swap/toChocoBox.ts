@@ -67,6 +67,32 @@ export function leakySignature(message: Uint8Array, scalar: Uint8Array): Uint8Ar
 }
 
 export function extractScalarFromLeakySignature(signature: Uint8Array, message: Uint8Array, publicKey: Uint8Array): Uint8Array {
+  /*
+  If you can understand this you understand the protocol.
+
+  How Schnorr signatures work:
+  s == r + hash(R|C|msg)*c
+  sG == R + hash(R|C|msg)*C
+  R|s (| concat) is the signature.
+  c and C are the private respectively public key.
+  msg is the message we are signing.
+
+  If Algorand exposed ed25519 scalarmult as an opcode, it would be trivial to check.
+  It doesn't, but it does expose ed25519verify. We can hack it to our favor. 
+  If we force r = 1 (r = 0 seems to not be allowed by nacl :C):
+
+  s == 1 + hash(R|C|msg)*c
+  s - 1 == hash(R|C|msg)*c
+  (s - 1)*hash(R|C|msg)^-1 == c
+
+  The smart contract can ensure that R really is 1G, in which case s - 1 must
+  be the hash(R|C|msg)*c. Since we know R, we know C and we know msg, we can calculate the
+  hash and take its multiplicative inverse with s to produce the scalar c, i.e. private key.
+
+  (Note that ed25519verify sees msg as b'progData'| program_hash | data. The new 
+  ed25519verify_bare will not require those things.) 
+  */
+
   if (signature.length !== 64) {
     throw new Error('Invalid signature length')
   }

@@ -110,9 +110,6 @@ describe('LeakSwap contract', () => {
 })
 
 
-
-
-
 // Ali funds the contract
 // This function is used to fund the LeakSwap contract after it has been deployed
 async function aliFundContract(
