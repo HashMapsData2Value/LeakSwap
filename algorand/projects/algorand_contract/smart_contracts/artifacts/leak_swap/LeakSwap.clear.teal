@@ -1,5 +1,0 @@
-#pragma version 10
-
-smart_contracts.leak_swap.contract.LeakSwap.clear_state_program:
-    pushint 1 // 1
-    return
