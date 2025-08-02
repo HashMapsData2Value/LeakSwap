@@ -18,6 +18,13 @@
     "isolatedModules": true,
     "noEmit": true
   },
-  "include": ["smart_contracts/**/*.ts"],
-  "exclude": ["node_modules", "dist", "coverage"]
+  "include": [
+    "smart_contracts/**/*.ts",
+    "../../../leakswap-utils/src/algorand-utils.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "coverage"
+  ]
 }

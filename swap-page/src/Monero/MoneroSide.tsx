@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import moneroTs, { MoneroTx, MoneroWalletFull, MoneroOutputWallet, MoneroWalletListener } from "monero-ts";
-import { getCompleteAddress, genPrivateSpendKey, genPrivateViewKey } from './toChocoBox2';
+import { getCompleteAddress, genPrivateSpendKey, genPrivateViewKey } from '../../../leakswap-utils/src/monero-utils';
 
 
 export default function MoneroSide() {

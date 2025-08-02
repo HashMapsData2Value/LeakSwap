@@ -3,7 +3,9 @@ import { registerDebugEventHandlers } from '@algorandfoundation/algokit-utils-de
 import { algorandFixture } from '@algorandfoundation/algokit-utils/testing'
 import { beforeAll, beforeEach, describe, test, expect } from 'vitest'
 import { LeakSwapClient, LeakSwapFactory } from '../artifacts/leak_swap/LeakSwapClient'
-import { extractScalarFromLeakySignature, genScalar, getPK, leakySignature } from './toChocoBox'
+// import { genScalar } from '../../../../../leakswap-utils/src/algorand-utils'
+import { genPrivateSpendKey } from '../../../../../leakswap-utils/src/monero-utils'
+import { extractScalarFromLeakySignature, hexToUint8Array, getPK, leakySignature } from '../../../../../leakswap-utils/src/common'
 import { Account, Address, Algodv2 } from 'algosdk'
 import { IndexerClient } from 'algosdk/dist/types/client/v2/indexer/indexer'
 import { TransactionSignerAccount } from '@algorandfoundation/algokit-utils/types/account'
@@ -58,8 +60,8 @@ describe('LeakSwap contract', () => {
 
     // TODO: replace with 0 Algo initial funds, funding by calling funder LSIG
     const xinAlgoAccount = (await localnet.context.generateAccount({ initialFunds: (10).algo(), suppressLog: true }))
-    const aliXternalSK = genScalar()
-    const xinXternalSK = genScalar()
+    const aliXternalSK = hexToUint8Array(genPrivateSpendKey())//genScalar()
+    const xinXternalSK = hexToUint8Array(genPrivateSpendKey())//genScalar()
 
     const leakySwapCreateParams: LeakSwapCreateAppParams = {
       aliXternalPK: getPK(aliXternalSK),

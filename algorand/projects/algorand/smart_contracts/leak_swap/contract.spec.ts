@@ -2,7 +2,9 @@ import { TestExecutionContext } from '@algorandfoundation/algorand-typescript-te
 import { describe, expect, it } from 'vitest'
 import { Bytes } from '@algorandfoundation/algorand-typescript'
 import { LeakSwap } from './contract.algo'
-import { genScalar, getPK, leakySignature } from './toChocoBox'
+// import { genScalar } from '../../../../../leakswap-utils/src/algorand-utils'
+import { genPrivateSpendKey } from '../../../../../leakswap-utils/src/monero-utils'
+import { getPK, leakySignature, hexToUint8Array } from '../../../../../leakswap-utils/src/common'
 import { ed25519 } from '@noble/curves/ed25519'
 
 export enum LeakSwapState {
@@ -16,12 +18,11 @@ describe('LeakSwap contract', () => {
   const ctx = new TestExecutionContext()
   const aliAlgoAddr = ctx.defaultSender
   const xinAlgoAddr = ctx.any.account()
-  const transferAmount = 1_000_000
 
   it('test leakySignature method in contract', () => {
     const contract = ctx.contract.create(LeakSwap)
 
-    const a = genScalar()
+    const a = hexToUint8Array(genPrivateSpendKey())
     const pk = getPK(a);
 
     // Fixed Contract Address
@@ -65,9 +66,9 @@ describe('LeakSwap contract', () => {
   it('LeakSwap: Simple Happy Path', async () => {
     const contract = ctx.contract.create(LeakSwap)
 
-    const aliXternalSK = genScalar()
+    const aliXternalSK = hexToUint8Array(genPrivateSpendKey())
     const aliXternalPK = getPK(aliXternalSK)
-    const xinXternalSK = genScalar()
+    const xinXternalSK = hexToUint8Array(genPrivateSpendKey())
     const xinXternalPK = getPK(xinXternalSK)
     const t0 = Date.now() + 3600 * 1000 // 1 hour from current time
     const t1 = t0 + 1800 * 1000 // 30 minutes after t0
@@ -139,9 +140,9 @@ describe('LeakSwap contract', () => {
   it('LeakSwap: T0 TimeOut Path', async () => {
     const contract = ctx.contract.create(LeakSwap)
 
-    const aliXternalSK = genScalar()
+    const aliXternalSK = hexToUint8Array(genPrivateSpendKey())
     const aliXternalPK = getPK(aliXternalSK)
-    const xinXternalSK = genScalar()
+    const xinXternalSK = hexToUint8Array(genPrivateSpendKey())
     const xinXternalPK = getPK(xinXternalSK)
     const t0 = Date.now() + 3600 * 1000 // 1 hour from current time
     const t1 = t0 + 1800 * 1000 // 30 minutes after t0
@@ -224,9 +225,9 @@ describe('LeakSwap contract', () => {
   it('LeakSwap: Ali Leaky Refunds', async () => {
     const contract = ctx.contract.create(LeakSwap)
 
-    const aliXternalSK = genScalar()
+    const aliXternalSK = hexToUint8Array(genPrivateSpendKey())
     const aliXternalPK = getPK(aliXternalSK)
-    const xinXternalSK = genScalar()
+    const xinXternalSK = hexToUint8Array(genPrivateSpendKey())
     const xinXternalPK = getPK(xinXternalSK)
     const t0 = Date.now() + 3600 * 1000 // 1 hour from current time
     const t1 = t0 + 1800 * 1000 // 30 minutes after t0
@@ -261,9 +262,9 @@ describe('LeakSwap contract', () => {
   it('LeakSwap: T1 TimeOut PunishRefund Path', async () => {
     const contract = ctx.contract.create(LeakSwap)
 
-    const aliXternalSK = genScalar()
+    const aliXternalSK = hexToUint8Array(genPrivateSpendKey())
     const aliXternalPK = getPK(aliXternalSK)
-    const xinXternalSK = genScalar()
+    const xinXternalSK = hexToUint8Array(genPrivateSpendKey())
     const xinXternalPK = getPK(xinXternalSK)
     const t0 = Date.now() + 3600 * 1000 // 1 hour from current time
     const t1 = t0 + 1800 * 1000 // 30 minutes after t0
